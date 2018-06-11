@@ -5,7 +5,7 @@ const Messages = (props) => {
   const allMessages = props.messages.map((message) => {
     return (
       <p>
-        <b>Message {message.id}:</b>
+        <b>Message:</b>
           {message.body}
       </p>
     )

@@ -5,6 +5,7 @@ import logo from './logo.svg';
 import './App.css';
 import store from '../src/redux/store';
 import Messages from '../src/Messages';
+import SendMessage from '../src/SendMessage';
 // ========================================================================================
 
 class App extends Component {
@@ -16,7 +17,10 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to React Chat Messenger</h1>
           </header>
-          <Messages />
+          <div className='message_container'>
+            <SendMessage />
+            <Messages />
+          </div>
         </div>
       </Provider>
     );
