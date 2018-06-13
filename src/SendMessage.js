@@ -2,6 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { sendMessage } from '../src/redux/actions/actions'
+import { actionCreators } from '../src/redux/actions/actions'
 // ========================================================================================
 
 class SendMessage extends React.Component {
@@ -12,6 +13,10 @@ class SendMessage extends React.Component {
     }
     this.onTextEntry = this.onTextEntry.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.socketConnect();
   }
 
   onTextEntry(e) {
@@ -38,7 +43,8 @@ class SendMessage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: (message) => dispatch(sendMessage(message))
+    sendMessage: (message) => dispatch(sendMessage(message)),
+    socketConnect: () => dispatch(actionCreators.socketConnect())
   }
 }
 

@@ -1,17 +1,14 @@
-export const sendMessage = (message) => {
-  console.log('SEND MESSAGE ACTION: ', message)
-
-  return {
-    type: 'WEBSOCKET_MESSAGE_SENT',
-    message
-  }
+// Next let's write some action creators for handling socket activity
+export const actionCreators = {
+  socketOpen: e => ({ type: 'SOCKET_OPEN'}),
+  socketClose: e => ({ type: 'SOCKET_CLOSE' }),
+  socketError: err => ({ type: 'SOCKET_ERROR', payload: err }),
+  socketMessage: data  => ({ type: 'SOCKET_MESSAGE', payload: data }),
+  socketConnect: e => ({ type: 'SOCKET_CONNECT' })
 }
 
-export const receivedMessage = (message) => {
-  console.log('RECEIVED MSG ACTION', message)
-
+export const sendMessage = () => {
   return {
-    type: 'WEBSOCKET_MESSAGE_RECEIVED',
-    message
+    type: 'SEND_WEBSOCKET_MESSAGE'
   }
 }
