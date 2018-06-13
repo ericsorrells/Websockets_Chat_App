@@ -1,23 +1,45 @@
 // ========================================================================================
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { sendMessage } from '../src/redux/actions/actions'
 // ========================================================================================
 
 class SendMessage extends React.Component {
-  onSubmit() {
+  constructor(props) {
+    super(props)
+    this.state = {
+      messageText: ''
+    }
+    this.onTextEntry = this.onTextEntry.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
 
+  onTextEntry(e) {
+    this.setState({ messageText: e.target.value })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    this.props.sendMessage(this.state.messageText)
   }
 
   render() {
     return (
       <div>
-        <t4>Send A Message</t4>
-        <form className='form'>
-          <textarea></textarea>
-          <button type='submit'>Send Message</button>
+        <h1>Send A Message</h1>
+        <form className='form' onSubmit={this.handleSubmit}>
+          <textarea onChange={this.onTextEntry} />
+          <button type='submit' value={this.state.messageText}>Send Message</button>
         </form>
       </div>
     )
   }
 }
 
-export default SendMessage;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage: (message) => dispatch(sendMessage(message))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(SendMessage);
