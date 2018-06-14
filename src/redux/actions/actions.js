@@ -7,8 +7,9 @@ export const actionCreators = {
   socketConnect: e => ({ type: 'SOCKET_CONNECT' })
 }
 
-export const sendMessage = () => {
+export const sendMessage = (body) => {
   return {
-    type: 'SEND_WEBSOCKET_MESSAGE'
+    type: 'SEND_WEBSOCKET_MESSAGE',
+    body
   }
 }

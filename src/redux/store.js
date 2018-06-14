@@ -1,11 +1,12 @@
 // ========================================================================================
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose, dispatch } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import websocketReducer from './reducers/websocketReducer';
 import { websocketSaga }    from './sagas/websocketSaga';
 import createSocketMiddleware from '../redux/middleware/middleware';
 import { actionCreators } from '../redux/actions/actions';
 // ========================================================================================
+
 
 const mySocketURL = 'ws://localhost:3001/'
 const mySubscribeData = { rotationalAxisIds: ['x', 'y', 'z'] }
@@ -17,6 +18,7 @@ const myEventHandlers = {
   onmessage: actionCreators.socketMessage
 }
 
+// const mySocketMiddleware = createSocketMiddleware()
 const mySocketMiddleware = createSocketMiddleware(
   mySocketURL,
   mySubscribeData,
@@ -25,7 +27,6 @@ const mySocketMiddleware = createSocketMiddleware(
 )
 
 console.log('STORE: middleware', mySocketMiddleware)
-
 
 const sagaMiddleware = createSagaMiddleware();
 
