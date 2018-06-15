@@ -8,8 +8,6 @@ import { actionCreators } from '../redux/actions/actions';
 // ========================================================================================
 
 
-const mySocketURL = 'ws://localhost:3001/'
-const mySubscribeData = { rotationalAxisIds: ['x', 'y', 'z'] }
 const mySocketPredicate = (action) => action.type === 'SOCKET_CONNECT' // boolean
 const myEventHandlers = {
   onopen: actionCreators.socketOpen,
@@ -20,10 +18,8 @@ const myEventHandlers = {
 
 // const mySocketMiddleware = createSocketMiddleware()
 const mySocketMiddleware = createSocketMiddleware(
-  mySocketURL,
-  mySubscribeData,
-  mySocketPredicate,
-  myEventHandlers
+  // mySocketPredicate,
+  // myEventHandlers
 )
 
 console.log('STORE: middleware', mySocketMiddleware)

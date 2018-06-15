@@ -1,13 +1,13 @@
 import { bindActionCreators } from 'redux'
+import { messageReceived } from '../actions/actions';
 
 // Here we write the function for creating our middleware
 // Let's break down these arguments...
 const createSocketMiddleware = (
-  socketURL,          // the url our socket connects to
-  subscribeData,      // the handshake data our socket will send once connected (optional)
   shouldInstantiate,  // a predicate function to know when to connect our socket
   eventHandlers       // the actions we want our socket to dispatch
 ) => store => next => action => {
+  const shouldInstantiate = (action) => action.type === 'SOCKET_CONNECT'
   console.log('SHOULD_INSTANTIAVTE', shouldInstantiate(action))
   console.log('ACTION', action)
   const SOCKET_STATES = {
@@ -16,19 +16,8 @@ const createSocketMiddleware = (
     CLOSING: 2,
     CLOSED: 3
   };
-
-  const connect = () => {
-    console.log('CONNECT: creating webSocket connection')
-    return new Promise((resolve) => {
-      const websocket = new WebSocket('ws://localhost:3001/');
-      websocket.onopen = () => {
-        console.log('RESOLVING CONNECT: ', websocket)
-        resolve(websocket)
-      }
-    });
-  }
-
-  const websocket = new WebSocket(socketURL);
+  
+  const websocket = new WebSocket('ws://localhost:3001/');
   // const websocket = connect();
   console.log('WEBSOCKET NOW ALIVE----------------------', websocket)
   websocket.onopen = function (evt) { onOpen(evt) };
@@ -39,7 +28,7 @@ const createSocketMiddleware = (
   function onOpen(evt) {
     if (shouldInstantiate(action)) {
       console.log('ON OPEN EVENT', evt)
-      websocket.send(action);
+      // websocket.send(action);
     }
   }
 
@@ -49,8 +38,9 @@ const createSocketMiddleware = (
 
   function onMessage(evt) {
     console.log('RECEIVING MESSAGE!', evt)
-    // store.dispatch(evt.data)
     // websocket.close();
+    // const message = JSON.parse(evt.data);
+    // store.dispatch(messageReceived(message.body))
   }
 
   function onError(evt) {
@@ -63,16 +53,16 @@ const createSocketMiddleware = (
 
     setTimeout(function () {
       if (websocket.readyState === SOCKET_STATES.OPEN && action.meta && action.meta.broadcast) {
-        console.log('INSIDE META===================')
-        console.log('INSIDE READY STATE: ', websocket.readyState === SOCKET_STATES.OPEN)
+        console.log('BROADCASTING===================')
+        console.log('BROADCASTING READY STATE: ', websocket.readyState === SOCKET_STATES.OPEN)
         const cleanAction = Object.assign({}, action, {
           meta: undefined
         });
         websocket.send(JSON.stringify(cleanAction));
         return {};
       }
-      console.log('OUTSIDE META===================')
-      console.log('INSIDE READY STATE: ', websocket.readyState === SOCKET_STATES.OPEN)
+      console.log('NOT BROADCASTING===================')
+      console.log('NOT BROADCASTING READY STATE: ', websocket.readyState === SOCKET_STATES.OPEN)
       next(action)
       // }
     }, 50)
