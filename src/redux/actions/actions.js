@@ -10,6 +10,13 @@ export const actionCreators = {
 export const sendMessage = (body) => {
   return {
     type: 'SEND_WEBSOCKET_MESSAGE',
+    meta: { broadcast: true },
     body
+  }
+}
+
+export const sendLocalMessage = () => {
+  return {
+    type: 'SEND_LOCAL_MESSAGE'
   }
 }

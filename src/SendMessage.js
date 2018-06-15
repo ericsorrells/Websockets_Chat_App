@@ -1,7 +1,7 @@
 // ========================================================================================
 import React from 'react'
 import { connect } from 'react-redux'
-import { sendMessage } from '../src/redux/actions/actions'
+import { sendMessage, sendLocalMessage } from '../src/redux/actions/actions'
 import { actionCreators } from '../src/redux/actions/actions'
 // ========================================================================================
 
@@ -13,6 +13,7 @@ class SendMessage extends React.Component {
     }
     this.onTextEntry = this.onTextEntry.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
@@ -28,6 +29,11 @@ class SendMessage extends React.Component {
     this.props.sendMessage(this.state.messageText)
   }
 
+  handleClick() {
+    console.log('HANDLING CLICK')
+    this.props.sendLocalMessage()
+  }
+
   render() {
     return (
       <div>
@@ -36,6 +42,7 @@ class SendMessage extends React.Component {
           <textarea onChange={this.onTextEntry} />
           <button type='submit' value={this.state.messageText}>Send Message</button>
         </form>
+        <button onClick={this.handleClick}>Fire Local Action</button>
       </div>
     )
   }
@@ -44,6 +51,7 @@ class SendMessage extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (message) => dispatch(sendMessage(message)),
+    sendLocalMessage: () => dispatch(sendLocalMessage()),
     socketConnect: () => dispatch(actionCreators.socketConnect())
   }
 }

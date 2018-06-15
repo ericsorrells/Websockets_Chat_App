@@ -13,6 +13,8 @@ const websocketReducer = (state = websocketReducerDefaultState, action) => {
         ...state,
         {body: action.body}
       ]
+    case 'SEND_LOCAL_MESSAGE':
+      return state
     default:
       return state;
   }
