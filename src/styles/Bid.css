@@ -1,0 +1,32 @@
+.bid__user-bid {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  box-shadow: inset -9px -5px 15px -9px rgba(173,166,173,1);
+}
+
+.bid__button {
+  background-color: #DF7F33;
+  color: white;
+  width: 150px;
+  padding: 10px;
+  border: none;
+  margin: 3px;
+  font-size: 1rem;
+}
+
+.full_width {
+  display: block;
+  width: 306px;
+}
+
+.bid__error {
+  color: darkred;
+  font-weight: bold;
+  border: 1px solid darkred;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
