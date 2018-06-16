@@ -1,0 +1,16 @@
+.high-bid__container {
+  margin-bottom: 50px;
+  padding: 10px;
+  border: 1px solid black;
+  box-shadow: 10px 10px 31px -9px rgba(0,0,0,0.5);
+}
+
+.high-bid__title {
+  margin: 5px;
+}
+
+.high-bid__bid-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

@@ -2,6 +2,8 @@
 import { createStore, combineReducers, applyMiddleware, compose, dispatch } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import websocketReducer from './reducers/websocketReducer';
+import bidReducer       from './reducers/bidReducer';
+import messageReducer   from './reducers/messageReducer';
 import { websocketSaga }    from './sagas/websocketSaga';
 import createSocketMiddleware from '../redux/middleware/middleware';
 import { actionCreators } from '../redux/actions/actions';
@@ -16,11 +18,7 @@ const myEventHandlers = {
   onmessage: actionCreators.socketMessage
 }
 
-// const mySocketMiddleware = createSocketMiddleware()
-const mySocketMiddleware = createSocketMiddleware(
-  // mySocketPredicate,
-  // myEventHandlers
-)
+const mySocketMiddleware = createSocketMiddleware()
 
 console.log('STORE: middleware', mySocketMiddleware)
 
@@ -31,7 +29,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middlewares = [sagaMiddleware, mySocketMiddleware];
 
 const mainReducer = combineReducers({
-  messages: websocketReducer
+  messages: messageReducer,
+  bid: bidReducer
 })
 
 const store = createStore(

@@ -1,11 +1,12 @@
 // ========================================================================================
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import logo from './logo.svg';
 import './App.css';
 import store from '../src/redux/store';
-import Messages from '../src/Messages';
-import SendMessage from '../src/SendMessage';
+import Messages from '../src/components/Messages';
+import SendMessage from '../src/components/SendMessage';
+import HighBid from '../src/components/HighBid';
+import Bid from '../src/components/Bid';
 // ========================================================================================
 
 class App extends Component {
@@ -14,11 +15,14 @@ class App extends Component {
       <Provider store={store}>
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to React Chat Messenger</h1>
+            <h1 className="App-title">Welcome to Bidder</h1>
           </header>
           <div className='message_container'>
-            <SendMessage />
+            <div>
+              <HighBid/>
+              <Bid />
+              <SendMessage />
+            </div>
             <Messages />
           </div>
         </div>

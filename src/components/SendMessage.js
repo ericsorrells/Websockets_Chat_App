@@ -1,8 +1,8 @@
 // ========================================================================================
 import React from 'react'
 import { connect } from 'react-redux'
-import { sendMessage, sendLocalMessage } from '../src/redux/actions/actions'
-import { actionCreators } from '../src/redux/actions/actions'
+import { sendMessage, sendLocalMessage } from '../../src/redux/actions/actions'
+import { actionCreators } from '../../src/redux/actions/actions'
 // ========================================================================================
 
 class SendMessage extends React.Component {

@@ -1,20 +1,7 @@
-const websocketReducerDefaultState = [
-  { body: 'I am text message 1!' },
-  { body: 'I am text message 2!' },
-  { body: 'I am text message 3!' },
-];
+const websocketReducerDefaultState = [];
 
 const websocketReducer = (state = websocketReducerDefaultState, action) => {
-  console.log('REDUCER: ', action)
-
   switch (action.type) {
-    case 'WEBSOCKET_MESSAGE_RECEIVED':
-      return [
-        ...state,
-        {body: action.body}
-      ]
-    case 'SEND_LOCAL_MESSAGE':
-      return state
     default:
       return state;
   }
