@@ -1,11 +1,10 @@
 const defaultState = [];
 
 const messageReducer = (state = defaultState, action) => {
-  console.log('MSG RED', action)
-
   if(action.meta) { return state }
 
   switch (action.type) {
+    case 'SEND_LOCAL_MESSAGE':
     case 'SEND_MESSAGE':
       return [
         ...state,
@@ -14,8 +13,6 @@ const messageReducer = (state = defaultState, action) => {
           userName: action.userName
         }
       ]
-    case 'SEND_LOCAL_MESSAGE':
-      return state
     default:
       return state;
   }

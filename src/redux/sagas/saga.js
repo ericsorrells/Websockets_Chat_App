@@ -1,15 +1,32 @@
 // // ========================================================================================
 import {takeEvery, eventChannel} from 'redux-saga';
 import {put, call, take, fork} from 'redux-saga/effects';
+import { sendLocalMessage } from '../actions/actions'
 // // import {INITIALIZE_WEB_SOCKETS_CHANNEL, WEBSOCKET_MESSAGE_RECEIVED} from '../actions';
 // import { receivedMessage } from '../actions/actions';
 // // ========================================================================================
 
 
-export function* websocketSaga() {
-//   console.log('WEBSOCKET SAGA ALIVE')
+function* listeners() {
+  yield [
+    // takeEvery('INITIALIZE_WEB_SOCKETS_CHANNEL', initializeWebSocketsChannel),
+    // takeEvery('WEBSOCKET_MESSAGE_SENT', sendMessageSaga, socket),
+    takeEvery('RECEIVED_BID', bidSaga)
+  ]
+}
 
-  // yield fork(initializeWebSockets)
+export function* mainSaga() {
+  console.log('MAIN SAGA IS ALIVE')
+  yield fork(listeners)
+}
+
+export function* bidSaga(incomingBid) {
+  console.log('BID SAGA:', incomingBid)
+  const { bidAmount, userName } = incomingBid
+  yield put(sendLocalMessage(`* NEW BID RECEIVED: $${bidAmount} FROM ${userName} *`))
+}
+
+export function* websocketSaga() {
 }
 
 // function connect() {
@@ -104,13 +121,6 @@ export function* websocketSaga() {
 
 
 
-// // function* listeners(socket) {
-// //   yield [
-// //     takeEvery('INITIALIZE_WEB_SOCKETS_CHANNEL', initializeWebSocketsChannel),
-// //     takeEvery('WEBSOCKET_MESSAGE_SENT', sendMessageSaga, socket),
-// //     // takeEvery()
-// //   ]
-// // }
 
 // // export function* websocketSaga() {
 // //   yield fork(initializeWebSocketsChannel)
