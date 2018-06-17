@@ -20,6 +20,8 @@
 .full_width {
   display: block;
   width: 306px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .bid__error {

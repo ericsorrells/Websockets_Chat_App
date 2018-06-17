@@ -15,7 +15,6 @@ class SendMessage extends React.Component {
     }
     this.onTextEntry = this.onTextEntry.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleClick = this.handleClick.bind(this)
   }
 
   onTextEntry(e) {
@@ -28,10 +27,6 @@ class SendMessage extends React.Component {
     this.setState({ messageText: '' })
   }
 
-  handleClick() {
-    this.props.sendLocalMessage()
-  }
-
   render() {
     return (
       <div className='send-message__container'>
@@ -39,9 +34,8 @@ class SendMessage extends React.Component {
         <h3>Send Other Users A Message</h3>
         <form className='form' onSubmit={this.handleSubmit}>
           <textarea onChange={this.onTextEntry} className='send-message__input' value={this.state.messageText}/>
-          <button type='submit' value={this.state.messageText} className='send-message__button'>Send Message</button>
+          <button type='submit' value={this.state.messageText} className='send-message__button full_width'>Send Message</button>
         </form>
-        <button onClick={this.handleClick} className='send-message__button'>Fire Local Action</button>
       </div>
     )
   }

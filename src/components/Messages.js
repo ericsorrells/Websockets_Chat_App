@@ -18,9 +18,9 @@ const Messages = (props) => {
   })
 
   return (
-    <div>
+    <div className='messages__outer-container'>
       <h3>User Messages:</h3>
-      <div className='message__container'>
+      <div className='messages__container'>
         {allMessages}
       </div>
     </div>

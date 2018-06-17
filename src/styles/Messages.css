@@ -1,13 +1,26 @@
-.message__container {
-  width: 500px;
+.messages__outer-container {
+  text-align: left;
+}
+
+.messages__container {
+  width: 100%;
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: inset -9px -5px 15px -9px rgba(173,166,173,1);
   padding: 10px;
   text-align: left;
-  height: 75%;
+  min-height: 300px;
 }
 
 .message__user-name-highight {
   color: green
+}
+
+@media only screen and (max-width: 600px) {
+  .messages__container {
+    width: 90%;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

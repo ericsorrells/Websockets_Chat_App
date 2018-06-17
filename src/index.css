@@ -9,7 +9,31 @@ body {
   flex-direction: column;
 }
 
-.message_container {
+.app_container {
   display: flex;
   justify-content: space-around;
+}
+
+.main__bid-container {
+  width: 30%;
+}
+
+.main__messages-container {
+  width: 40%;
+}
+
+@media screen and (max-width: 600px) {
+  .app_container {
+    flex-direction: column;
+    padding: 20px;
+    width: 90%;
+  }
+
+  .main__bid-container {
+    width: 100%;
+  }
+
+  .main__messages-container {
+    width: 100%;
+  }
 }

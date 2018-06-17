@@ -23,7 +23,7 @@ export function* mainSaga() {
 export function* bidSaga(incomingBid) {
   console.log('BID SAGA:', incomingBid)
   const { bidAmount, userName } = incomingBid
-  yield put(sendLocalMessage(`* NEW BID RECEIVED: $${bidAmount} FROM ${userName} *`))
+  yield put(sendLocalMessage(`* NEW BID RECEIVED: $${bidAmount} from ${userName} *`))
 }
 
 export function* websocketSaga() {

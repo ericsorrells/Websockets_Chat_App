@@ -20,13 +20,15 @@ const Main = (props) => {
 
 const BidApp = () => {
   return (
-    <div className='message_container'>
-      <div>
+    <div className='app_container'>
+      <div className='main__bid-container'>
         <HighBid />
         <Bid />
         <SendMessage />
       </div>
-      <Messages />
+      <div className='main__messages-container'>
+        <Messages />
+      </div>
     </div>
   )
 }
