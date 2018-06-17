@@ -24,6 +24,7 @@ class Bid extends React.Component {
     const currentBidAmount = this.state.bidAmount
     const newBidAmount = currentBidAmount + bidIncrement
     this.setState({ bidAmount: newBidAmount })
+    this.setState({ error: '' })
   }
 
   clearBid() {
@@ -32,8 +33,9 @@ class Bid extends React.Component {
 
   onFormSubmit(e) {
     e.preventDefault()
-    if (isHighBid(this.state.bidAmount, this.props.currentBid)){
-      this.props.broadcastBid(this.state.bidAmount)
+    if (isHighBid(this.state.bidAmount, this.props.currentBid)) {
+      this.props.broadcastBid(this.state.bidAmount, this.props.userName)
+      this.setState({ bidAmount: 0 })
     } else {
       this.setState({ error: 'Your Bid Is Less Than The Current High Bid!' })
     }
@@ -42,21 +44,21 @@ class Bid extends React.Component {
   render() {
     return (
       <div>
-        { shouldShowError(this.state.bidAmount, this.state.error) && <div className='bid__error'>{ this.state.error } </div> }
+        {shouldShowError(this.state.bidAmount, this.state.error) && <div className='bid__error'>{this.state.error} </div>}
         <div className='bid__user-bid'>
-          ${this.state.bidAmount}
+          {this.state.bidAmount}
         </div>
         <form onSubmit={this.onFormSubmit}>
           <div>
-            <button onClick={() => this.handleBid(50)}  type='button' className='bid__button'>50</button>
+            <button onClick={() => this.handleBid(50)} type='button' className='bid__button'>50</button>
             <button onClick={() => this.handleBid(-50)} type='button' className='bid__button'>-50</button>
           </div>
           <div>
-            <button onClick={() => this.handleBid(100)}  type='button' className='bid__button'>100</button>
+            <button onClick={() => this.handleBid(100)} type='button' className='bid__button'>100</button>
             <button onClick={() => this.handleBid(-100)} type='button' className='bid__button'>-100</button>
           </div>
           <div>
-            <button onClick={() => this.handleBid(500)}  type='button' className='bid__button'>500</button>
+            <button onClick={() => this.handleBid(500)} type='button' className='bid__button'>500</button>
             <button onClick={() => this.handleBid(-500)} type='button' className='bid__button'>-500</button>
           </div>
           <button onClick={() => this.clearBid()} type='button' className='bid__button full_width'>Clear Bid</button>
@@ -68,30 +70,33 @@ class Bid extends React.Component {
 }
 
 const shouldShowError = (bidAmount, error) => {
-  console.log('ERROR: bidAmount', bidAmount > 0)
-  console.log('ERROR: error', error)
-  console.log('ERROR: bool', (bidAmount > 0 && error))
+  // console.log('ERROR: bidAmount', bidAmount > 0)
+  // console.log('ERROR: error', error)
+  // console.log('ERROR: bool', (bidAmount > 0 && error))
   return (bidAmount > 0 && error)
 }
 
 const isHighBid = (userBid, currentBid) => {
-  console.log('HIGH BID: userBid', userBid)
-  console.log('HIGH BID: currentBid', currentBid)
-  console.log('HIGH BID: bool', userBid > currentBid)
-
-
+  // console.log('HIGH BID: userBid', userBid)
+  // console.log('HIGH BID: currentBid', currentBid)
+  // console.log('HIGH BID: bool', userBid > currentBid)
   return userBid > currentBid
+}
+
+const isHighBidder = (bidder, currentUser) => {
+  return bidder === currentUser
 }
 
 const mapStateToProps = (state) => {
   return {
-    currentBid: state.bid.currentBid
+    currentBid: state.bid.currentBid,
+    userName: state.user.name
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    broadcastBid: (bidAmount) => dispatch(broadcastBid(bidAmount))
+    broadcastBid: (bidAmount, userName) => dispatch(broadcastBid(bidAmount, userName))
   }
 }
 

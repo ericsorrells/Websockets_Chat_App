@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { sendMessage, sendLocalMessage } from '../../src/redux/actions/actions'
 import { actionCreators } from '../../src/redux/actions/actions'
 // ========================================================================================
+import '../styles/SendMessages.css'
+// ========================================================================================
 
 class SendMessage extends React.Component {
   constructor(props) {
@@ -16,44 +18,47 @@ class SendMessage extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount() {
-    this.props.socketConnect();
-  }
-
   onTextEntry(e) {
     this.setState({ messageText: e.target.value })
   }
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.sendMessage(this.state.messageText)
+    this.props.sendMessage(this.state.messageText, this.props.userName)
+    this.setState({ messageText: '' })
   }
 
   handleClick() {
-    console.log('HANDLING CLICK')
     this.props.sendLocalMessage()
   }
 
   render() {
     return (
-      <div>
-        <h1>Send A Message</h1>
+      <div className='send-message__container'>
+        <hr/>
+        <h3>Send Other Users A Message</h3>
         <form className='form' onSubmit={this.handleSubmit}>
-          <textarea onChange={this.onTextEntry} />
-          <button type='submit' value={this.state.messageText}>Send Message</button>
+          <textarea onChange={this.onTextEntry} className='send-message__input' value={this.state.messageText}/>
+          <button type='submit' value={this.state.messageText} className='send-message__button'>Send Message</button>
         </form>
-        <button onClick={this.handleClick}>Fire Local Action</button>
+        <button onClick={this.handleClick} className='send-message__button'>Fire Local Action</button>
       </div>
     )
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    userName: state.user.name
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: (message) => dispatch(sendMessage(message)),
+    sendMessage: (message, userName) => dispatch(sendMessage(message, userName)),
     sendLocalMessage: () => dispatch(sendLocalMessage()),
     socketConnect: () => dispatch(actionCreators.socketConnect())
   }
 }
 
-export default connect(null, mapDispatchToProps)(SendMessage);
+export default connect(mapStateToProps, mapDispatchToProps)(SendMessage);

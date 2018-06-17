@@ -1,0 +1,13 @@
+.message__container {
+  width: 500px;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: inset -9px -5px 15px -9px rgba(173,166,173,1);
+  padding: 10px;
+  text-align: left;
+  height: 75%;
+}
+
+.message__user-name-highight {
+  color: green
+}

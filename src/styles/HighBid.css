@@ -14,3 +14,8 @@
   font-weight: bold;
   margin-bottom: 20px;
 }
+
+.bid__high-bidder-msg {
+  color: green;
+  font-size: 1rem;
+}

@@ -3,13 +3,16 @@ const defaultState = {
 };
 
 const bidReducer = (state = defaultState, action) => {
+  console.log('RED', action)
+
   if(action.meta) { return state }
 
   switch (action.type) {
     case 'BROADCAST_BID':
       return {
         ...state,
-        currentBid: action.bidAmount
+        currentBid: action.bidAmount,
+        userName: action.userName
       }
     default:
       return state

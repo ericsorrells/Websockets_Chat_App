@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import websocketReducer from './reducers/websocketReducer';
 import bidReducer       from './reducers/bidReducer';
 import messageReducer   from './reducers/messageReducer';
+import userReducer      from './reducers/userReducer';
 import { websocketSaga }    from './sagas/websocketSaga';
 import createSocketMiddleware from '../redux/middleware/middleware';
 import { actionCreators } from '../redux/actions/actions';
@@ -30,7 +31,8 @@ const middlewares = [sagaMiddleware, mySocketMiddleware];
 
 const mainReducer = combineReducers({
   messages: messageReducer,
-  bid: bidReducer
+  bid: bidReducer,
+  user: userReducer
 })
 
 const store = createStore(

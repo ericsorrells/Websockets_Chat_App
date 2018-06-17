@@ -2,14 +2,16 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import './App.css';
-import store from '../src/redux/store';
-import Messages from '../src/components/Messages';
-import SendMessage from '../src/components/SendMessage';
-import HighBid from '../src/components/HighBid';
-import Bid from '../src/components/Bid';
+import store from './redux/store';
+import { actionCreators } from './redux/actions/actions';
+import Main from './components/Main'
 // ========================================================================================
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(actionCreators.socketConnect());
+  }
+
   render() {
     return (
       <Provider store={store}>
@@ -17,18 +19,11 @@ class App extends Component {
           <header className="App-header">
             <h1 className="App-title">Welcome to Bidder</h1>
           </header>
-          <div className='message_container'>
-            <div>
-              <HighBid/>
-              <Bid />
-              <SendMessage />
-            </div>
-            <Messages />
-          </div>
+          <Main />
         </div>
       </Provider>
     );
   }
 }
 
-export default App;
+export default App

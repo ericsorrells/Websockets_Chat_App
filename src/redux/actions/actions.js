@@ -14,11 +14,12 @@ export const messageReceived = (body) => {
   }
 }
 
-export const sendMessage = (body) => {
+export const sendMessage = (body, userName) => {
   return {
     type: 'SEND_MESSAGE',
+    body,
+    userName,
     meta: { broadcast: true },
-    body
   }
 }
 
