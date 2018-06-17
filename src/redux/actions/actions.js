@@ -23,8 +23,10 @@ export const sendMessage = (body, userName) => {
   }
 }
 
-export const sendLocalMessage = () => {
+export const sendLocalMessage = (body, userName = 'BidderApp') => {
   return {
-    type: 'SEND_LOCAL_MESSAGE'
+    type: 'SEND_LOCAL_MESSAGE',
+    body,
+    userName
   }
 }
