@@ -1,5 +1,5 @@
 // ========================================================================================
-import { actionCreators } from '../actions/actions';
+import WS from '../utils/websocket'
 // ========================================================================================
 
 const createSocketMiddleware = () => {
@@ -10,22 +10,7 @@ const createSocketMiddleware = () => {
     CLOSED: 3
   }
 
-  var socket = null;
-
-  const onOpen = (ws, store, action) => evt => {
-    store.dispatch(actionCreators.socketConnected());
-  }
-
-  const onClose = (store) => evt => {
-    store.dispatch(actionCreators.socketClose());
-  }
-
-  const onMessage = (ws, store) => evt => {
-    const action = JSON.parse(evt.data)
-    const newActionType = action.type.replace("BROADCAST", "RECEIVED")
-    action.type = newActionType;
-    store.dispatch(action)
-  }
+  let socket = null;
 
   return store => next => action => {
     switch (action.type) {
@@ -33,10 +18,7 @@ const createSocketMiddleware = () => {
         if (socket != null) {
           socket.close();
         }
-        socket = new WebSocket('ws://localhost:3001');
-        socket.onmessage = onMessage(socket, store);
-        socket.onclose = onClose(socket, store);
-        socket.onopen = onOpen(socket, store, action);
+        socket = new WS(store).socket
         break;
       case 'SOCKET_CLOSE':
         if (socket != null) {
