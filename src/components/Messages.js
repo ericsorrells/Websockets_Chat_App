@@ -7,10 +7,10 @@ import '../styles/Messages.css';
 
 const Messages = (props) => {
   const currentUser = props.userName;
-  const allMessages = props.messages.map((message) => {
+  const allMessages = props.messages.map((message, index) => {
     const userClass = message.userName === currentUser ? 'message__user-name-highight' : null
     return (
-      <p>
+      <p key={index}>
         <b className={userClass}>{message.userName}: </b>
         {message.body}
       </p>

@@ -46,7 +46,7 @@ class Bid extends React.Component {
       <div>
         {shouldShowError(this.state.bidAmount, this.state.error) && <div className='bid__error'>{this.state.error} </div>}
         <div className='bid__user-bid'>
-          {this.state.bidAmount}
+          ${this.state.bidAmount}
         </div>
         <form onSubmit={this.onFormSubmit}>
           <div>

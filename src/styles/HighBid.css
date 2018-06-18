@@ -16,6 +16,13 @@
 }
 
 .bid__high-bidder-msg {
-  color: green;
+  background-color: rgba(25, 134, 67, 0.4);
+  border: 1px solid #21603b;
+  color: darkgreen;
+  padding: 10px;
+  border-radius: 3px;
+  width: 90%;
   font-size: 1rem;
+  margin-left: auto;
+  margin-right: auto
 }

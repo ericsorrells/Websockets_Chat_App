@@ -6,8 +6,6 @@ import '../styles/HighBid.css';
 // ========================================================================================
 
 const HighBid = (props) => {
-  console.log('PROPS', props)
-
   return (
     <div className='high-bid__container'>
       <h4 className='high-bid__title'> The Current High Bid Is: </h4>
@@ -19,10 +17,6 @@ const HighBid = (props) => {
 }
 
 const isHighBidder = (bidder, currentUser) => {
-  console.log('BIDDEr', bidder)
-  console.log('USER', currentUser)
-
-
   return bidder === currentUser
 }
 
